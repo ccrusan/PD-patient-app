@@ -8,22 +8,22 @@
     </use>
 	  <use href="#tile-list-item" class="tile-list-item">
 		  <use id="foreButton" href="#square-button" y="10%" fill="fb-red">
-			  <set href="#text" attributeName="text-buffer" to="forewards" />
+			  <set href="#text" attributeName="text-buffer" to="Forwards" />
 		  </use>
 	  </use>
     <use href="#tile-list-item" class="tile-list-item">
       <use id="backButton" href="#square-button" y="$" fill="fb-blue">
-        <set href="#text" attributeName="text-buffer" to="backwards" />
+        <set href="#text" attributeName="text-buffer" to="Backwards" />
       </use>
     </use>
     <use href="#tile-list-item" class="tile-list-item">
       <use id="leftButton" href="#square-button" y="$" fill="fb-green">
-        <set href="#text" attributeName="text-buffer" to="leftwards" />
+        <set href="#text" attributeName="text-buffer" to="Leftwards" />
       </use>
     </use>
     <use href="#tile-list-item" class="tile-list-item">
       <use id="rightButton" href="#square-button" y="$" fill="fb-purple">
-        <set href="#text" attributeName="text-buffer" to="rightwards" />
+        <set href="#text" attributeName="text-buffer" to="Rightwards" />
       </use>
     </use>
    </use>

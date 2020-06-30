@@ -13,3 +13,15 @@
   font-family: System-Regular;
   fill: "white";
 }
+
+.large-value {
+    font-family: Seville-Book;
+    font-size: 120;
+    fill: #F80070;
+}
+
+.updated {
+    font-family: Seville-Book;
+    font-size: 64;
+    fill: #ffffff;
+}

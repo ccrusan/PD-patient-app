@@ -1,6 +1,9 @@
 import document from "document";
 
+
 let views;
+
+
 
 export function init(_views) {
 	views = _views;
@@ -36,13 +39,14 @@ function onMount() {
 		console.log("Fall type: collapse");
 		collapseButton.addEventListener("click", clickHandler);
 	}
+
+
 }
 
 /**
  * Sample button click with navigation.
  */
 function clickHandler(_evt) {
-	console.log("view-1 Button Clicked!");
 	/* Navigate to another screen */
 	views.navigate("view-2");
 }

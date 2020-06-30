@@ -15,25 +15,25 @@ function onMount() {
 
 	let foreButton = document.getElementById("foreButton");
 	foreButton.onactivate = function (evt) {
-		console.log("Fall type: trip");
+		console.log("Fall direction: forwards");
 		foreButton.addEventListener("click", clickHandler);
 	}
 
 	let backButton = document.getElementById("backButton");
 	backButton.onactivate = function (evt) {
-		console.log("Fall type: slip");
+		console.log("Fall direction: backwards");
 		backButton.addEventListener("click", clickHandler);
 	}
 
 	let rightButton = document.getElementById("rightButton");
 	rightButton.onactivate = function (evt) {
-		console.log("Fall type: fall");
+		console.log("Fall direction: rightwards");
 		rightButton.addEventListener("click", clickHandler);
 	}
 
 	let leftButton = document.getElementById("leftButton");
 	leftButton.onactivate = function (evt) {
-		console.log("Fall type: collapse");
+		console.log("Fall direction: leftwards");
 		leftButton.addEventListener("click", clickHandler);
 	}
 }
@@ -42,7 +42,6 @@ function onMount() {
  * Sample button click with navigation.
  */
 function clickHandler(_evt) {
-	console.log("view-2 Button Clicked!");
 	/* Navigate to another screen */
 	views.navigate("view-1");
 }

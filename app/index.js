@@ -22,16 +22,16 @@ const views = init(
 
 // This function updates the heart rate printed to console.
 function updateDisplay() {
-    console.log("Current heart rate: " + hrm.heartRate);
+        console.log("Current heart rate: " + hrm.heartRate);
 }
 
 // Create a new instance of the HeartRateSensor object
 var hrm = new HeartRateSensor();
-
+                                
 // Select the first view (view-1) after 1 second
-setTimeout(() => {
-    views.navigate("view-1");
-}, 1000);
+setTimeout(() => {              
+    views.navigate("view-1");   
+}, 1000);                                                   
 
 // Begin monitoring the sensor
 hrm.start();
