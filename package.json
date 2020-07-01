@@ -1,6 +1,6 @@
 {
   "fitbit": {
-    "appUUID": "bfe58c28-7d4e-437d-a3d5-aee75cf6714a",
+    "appUUID": "8fe5f0c0-882d-4cd2-aeb3-0b8f14f0816d",
     "appType": "app",
     "appDisplayName": "PD patient app",
     "iconFile": "resources/icon.png",
@@ -29,8 +29,7 @@
     "@fitbit/sdk": "^4.1.0"
   },
   "dependencies": {
-    "@fitbit/sdk-cli": "^1.7.2",
-    "fitbit-views": "file:fitbit-views"
+    "@fitbit/sdk-cli": "^1.7.2"
   },
   "scripts": {
     "build": "fitbit-build"

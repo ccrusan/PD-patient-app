@@ -3,6 +3,7 @@
 import document from "document";
 import { init } from "./views";
 import { HeartRateSensor } from "heart-rate";
+import * as messaging from "messaging";
 
 // Fetch UI elements we will need to change
 let hrLabel = document.getElementById("hrm");
@@ -20,10 +21,6 @@ const views = init(
     "./resources/views/"
 );
 
-// This function updates the heart rate printed to console.
-function updateDisplay() {
-        console.log("Current heart rate: " + hrm.heartRate);
-}
 
 // Create a new instance of the HeartRateSensor object
 var hrm = new HeartRateSensor();
@@ -37,4 +34,26 @@ setTimeout(() => {
 hrm.start();
 
 // And update the display every second
-setInterval(updateDisplay, 1000);
+setInterval(sendMessage, 5000);
+
+//---------------------------------------------------------------------------------//
+
+// Listen for the onopen event
+messaging.peerSocket.onopen = function () {
+    // Ready to send or receive messages
+    console.log("Socket opened (app)");
+    sendMessage();
+}
+
+// Send a message to the companion
+function sendMessage() {
+    // heart rate data to send
+    var data = {
+        title: 'Heart Rate is: ',
+        records: hrm.heartRate
+    }
+    if (messaging.peerSocket.readyState === messaging.peerSocket.OPEN) {
+        // Send the data to peer as a message
+        messaging.peerSocket.send(data);
+    }
+}
