@@ -17,6 +17,7 @@ const views = init(
     [
         ["view-1", () => import("./views/view-1")],
         ["view-2", () => import("./views/view-2")]
+        //["view-3", () => import("./views/view-3")]
     ],
     "./resources/views/"
 );
@@ -41,7 +42,7 @@ setInterval(sendMessage, 5000);
 // Listen for the onopen event
 messaging.peerSocket.onopen = function () {
     // Ready to send or receive messages
-    console.log("Socket opened (app)");
+    console.log("App socket opened");
     sendMessage();
 }
 
@@ -49,11 +50,19 @@ messaging.peerSocket.onopen = function () {
 function sendMessage() {
     // heart rate data to send
     var data = {
-        title: 'Heart Rate is: ',
-        records: hrm.heartRate
+        key: 'Heart Rate',
+        value: hrm.heartRate
     }
     if (messaging.peerSocket.readyState === messaging.peerSocket.OPEN) {
         // Send the data to peer as a message
         messaging.peerSocket.send(data);
+    } else {
+        // Catch error
+        console.error("Unable to send data from app.");
     }
 }
+
+// Message socket closes
+messaging.peerSocket.onclose = () => {
+    console.warn("App Socket Closed");
+};
