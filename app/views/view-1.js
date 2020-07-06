@@ -1,14 +1,17 @@
 import document from "document";
 
-
+// declare vars
 let views;
+let fallString = "null";
 
 
 
 export function init(_views) {
 	views = _views;
-	console.log("view-1 init()");
 	onMount();
+}
+export function getFallRecord() {
+	return fallString;
 }
 
 /**
@@ -16,37 +19,17 @@ export function init(_views) {
  */
 function onMount() {
 
-	let tripButton = document.getElementById("tripButton");
-	tripButton.onactivate = function (evt) {
-		console.log("Fall type: trip");
-		tripButton.addEventListener("click", clickHandler);
+	let fallBtn = document.getElementById("fallBtn");
+	fallBtn.onactivate = function (evt) {
+		fallString = "Fall";
+		views.navigate("view-2");
 	}
 
-	let slipButton = document.getElementById("slipButton");
-	slipButton.onactivate = function (evt) {
-		console.log("Fall type: slip");
-		slipButton.addEventListener("click", clickHandler);
-	}
-
-	let fallButton = document.getElementById("fallButton");
-	fallButton.onactivate = function (evt) {
-		console.log("Fall type: fall");
-		fallButton.addEventListener("click", clickHandler);
-	}
-
-	let collapseButton = document.getElementById("collapseButton");
-	collapseButton.onactivate = function (evt) {
-		console.log("Fall type: collapse");
-		collapseButton.addEventListener("click", clickHandler);
+	let nearFallBtn = document.getElementById("nearFallBtn");
+	nearFallBtn.onactivate = function (evt) {
+		fallString = "Near Fall";
+		views.navigate("view-2");
 	}
 
 
-}
-
-/**
- * Sample button click with navigation.
- */
-function clickHandler(_evt) {
-	/* Navigate to another screen */
-	views.navigate("view-2");
 }

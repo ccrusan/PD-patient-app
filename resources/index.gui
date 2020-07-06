@@ -12,17 +12,17 @@
 		  </use>
 	  </use>
     <use href="#tile-list-item" class="tile-list-item">
-      <use id="slipButton" href="#square-button" y="$" fill="fb-blue">
+      <use id="slipButton" href="#square-button" y="$" fill="fb-red">
         <set href="#text" attributeName="text-buffer" to="Slip" />
       </use>
     </use>
     <use href="#tile-list-item" class="tile-list-item">
-      <use id="collapseButton" href="#square-button" y="$" fill="fb-green">
+      <use id="collapseButton" href="#square-button" y="$" fill="fb-red">
         <set href="#text" attributeName="text-buffer" to="Collapse" />
       </use>
     </use>
     <use href="#tile-list-item" class="tile-list-item">
-      <use id="fallButton" href="#square-button" y="$" fill="fb-purple">
+      <use id="fallButton" href="#square-button" y="$" fill="fb-red">
         <set href="#text" attributeName="text-buffer" to="Fall" />
       </use>
     </use>

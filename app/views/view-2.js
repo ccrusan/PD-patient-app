@@ -1,11 +1,17 @@
 import document from "document";
 
+// declare vars
 let views;
+let fallString = "null";
+
+
 
 export function init(_views) {
 	views = _views;
-	console.log("view-1 init()");
 	onMount();
+}
+export function getFall() {
+	return fallString;
 }
 
 /**
@@ -13,35 +19,30 @@ export function init(_views) {
  */
 function onMount() {
 
-	let foreButton = document.getElementById("foreButton");
-	foreButton.onactivate = function (evt) {
-		console.log("Fall direction: forwards");
-		foreButton.addEventListener("click", clickHandler);
+	let tripBtn = document.getElementById("tripBtn");
+	tripBtn.onactivate = function (evt) {
+		fallString = "Trip";
+		views.navigate("view-3");
 	}
 
-	let backButton = document.getElementById("backButton");
-	backButton.onactivate = function (evt) {
-		console.log("Fall direction: backwards");
-		backButton.addEventListener("click", clickHandler);
+	let slipBtn = document.getElementById("slipBtn");
+	slipBtn.onactivate = function (evt) {
+		fallString = "Slip";
+		views.navigate("view-3");
 	}
 
-	let rightButton = document.getElementById("rightButton");
-	rightButton.onactivate = function (evt) {
-		console.log("Fall direction: rightwards");
-		rightButton.addEventListener("click", clickHandler);
+	let fallBtn = document.getElementById("fallBtn");
+	fallBtn.onactivate = function (evt) {
+		fallString = "Fall";
+		views.navigate("view-3");
 	}
 
-	let leftButton = document.getElementById("leftButton");
-	leftButton.onactivate = function (evt) {
-		console.log("Fall direction: leftwards");
-		leftButton.addEventListener("click", clickHandler);
+	let collapseBtn = document.getElementById("collapseBtn");
+	collapseBtn.onactivate = function (evt) {
+		fallString = "Collapse";
+		views.navigate("view-3");
 	}
+
+
 }
 
-/**
- * Sample button click with navigation.
- */
-function clickHandler(_evt) {
-	/* Navigate to another screen */
-	views.navigate("view-1");
-}
