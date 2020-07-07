@@ -38,7 +38,7 @@ messaging.peerSocket.onopen = function () {
 }
 
 // check for labeling event every 1 second
-setInterval(getMessage, 5000);
+setInterval(getMessage, 1000);
 
 // function to send message if fall has been recorded and confirmed
 function getMessage() {

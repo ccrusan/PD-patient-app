@@ -13,17 +13,19 @@ messaging.peerSocket.onopen = function () {
 // Listen for the onmessage event
 messaging.peerSocket.onmessage = function (evt) {
     // convert received message to strings
-    var time = (JSON.stringify(evt.data.time));
-    var hr = (JSON.stringify(evt.data.hr));
-    var event = (JSON.stringify(evt.data.event));
-    var fall = (JSON.stringify(evt.data.fall));
+    var mytime = (JSON.stringify(evt.data.time));
+    var myhr = (JSON.stringify(evt.data.hr));
+    var myevent = (JSON.stringify(evt.data.event));
+    var myfall = (JSON.stringify(evt.data.fall));
     
     // save the message to local storage
-    localStorage.setItem(event, hr, fall, time);
-    // retrieve data from local storage and display to console
-    //console.log(`${localStorage.getItem(time)}:${localStorage.getItem(key)}`)
+    localStorage.setItem("time", mytime);    //"key_name", string
+    localStorage.setItem("hr", myhr);
+    localStorage.setItem("event", myevent);
+    localStorage.setItem("fall", myfall);
 
-    console.log(`${time},${hr},${event},${fall}`)
+    // retrieve data from local storage and display to console
+    console.log(`${localStorage.getItem("time")},${localStorage.getItem("hr")},${localStorage.getItem("event")},${localStorage.getItem("fall")}`);
 }
 
 // Message socket closes
