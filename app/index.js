@@ -19,51 +19,68 @@ const views = init(
     "./resources/views/"
 );
 
+// Select the first view (view-1) after 1 second
+setTimeout(() => {
+    views.navigate("view-1");
+}, 1000);
+
 // Create a new instance of the HeartRateSensor object
 var hrm = new HeartRateSensor();
 
-// Select the first view (view-1) after 1 second
-setTimeout(() => {              
-    views.navigate("view-1");   
-}, 1000);                                                   
+                                                   
 
-// Begin monitoring the sensor
+// Begin monitoring sensors
 hrm.start();
+    // TODO: add other sensors
 
 
 // Listen for the onopen event
 messaging.peerSocket.onopen = function () {
     // Ready to send or receive messages
-    sendMessage();
 }
 
-// check for labeling event every 1 second
-setInterval(getMessage, 1000);
+// initialize empty json
+let jsonObj = [];
+// record sensor data every 1 second
+setInterval(getSensorRecord, 5000);
+// check for event every 1 second
+setInterval(checkEvent, 1000);
 
-// function to send message if fall has been recorded and confirmed
-function getMessage() {
+
+function checkEvent() {
     if (getFallConfirmation() == true) {
-        sendMessage("Fall");
+        let event = `${getFallRecord()}:${getFall()}:${getFallType()}`;  // ex: "NearFall:Slip:Backwards"
+        let data = getEventRecord(event);
+        jsonObj.push(data);
+    }
+    // check if local records json is 'full', send to companion
+    if (Object.keys(jsonObj).length >= 20) {         // ran out of memory at ~1000 when tested
+        sendToCompanion(jsonObj);
+        jsonObj = [];
     }
 }
 
-// When hrm sees new value, send message
-hrm.onreading = function () {
-    sendMessage(null);
+function getEventRecord(event) {
+    var timeStamp = new Date();
+    var jsonTime = timeStamp.toJSON();
+    let record = {};
+    record["time"] = jsonTime;
+    record["event"] = event;
+    return record;
 }
 
-// Send a message to the companion
-function sendMessage(event) {
+function getSensorRecord() {
     // generates new time stamp for each new message
     var timeStamp = new Date();
     var jsonTime = timeStamp.toJSON();
-    // heart rate data to send
-    var data = {
-        time: jsonTime,
-        hr: hrm.heartRate,
-        event: event,
-        fall: `${getFallRecord()}:${getFall()}:${getFallType()}`       //ex: "Near Fall:Slip:Forewards" 
-    }
+    let record = {};
+    record["time"]      = jsonTime;
+    record["hr"]        = hrm.heartRate;
+    // TODO: add other sensors
+    jsonObj.push(record);
+}
+
+function sendToCompanion(data) {
     if (messaging.peerSocket.readyState === messaging.peerSocket.OPEN) {
         // Send the data to peer as a message
         messaging.peerSocket.send(data);
@@ -72,6 +89,7 @@ function sendMessage(event) {
         console.error("Unable to send data from app.");
     }
 }
+
 
 // Message socket closes
 messaging.peerSocket.onclose = () => {

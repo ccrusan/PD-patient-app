@@ -9,23 +9,26 @@ messaging.peerSocket.onopen = function () {
     // Ready to send or receive messages
     console.log("Companion socket opened");
 }
-
+var i = 1;
 // Listen for the onmessage event
 messaging.peerSocket.onmessage = function (evt) {
-    // convert received message to strings
-    var mytime = (JSON.stringify(evt.data.time));
-    var myhr = (JSON.stringify(evt.data.hr));
-    var myevent = (JSON.stringify(evt.data.event));
-    var myfall = (JSON.stringify(evt.data.fall));
-    
+    // convert received message to string
+    var newRecordString = "-" + i;
+    let record = JSON.stringify(evt.data);
     // save the message to local storage
-    localStorage.setItem("time", mytime);    //"key_name", string
-    localStorage.setItem("hr", myhr);
-    localStorage.setItem("event", myevent);
-    localStorage.setItem("fall", myfall);
+    localStorage.setItem(newRecordString, record);
+    // print out localStoragg
+    dump(localStorage);
+    i++;
+}
 
-    // retrieve data from local storage and display to console
-    console.log(`${localStorage.getItem("time")},${localStorage.getItem("hr")},${localStorage.getItem("event")},${localStorage.getItem("fall")}`);
+function dump(storage) {
+    let store = []
+    for (let i = 0, l = storage.length; i < l; i++) {
+        let key = storage.key(i);
+        store.push({ key: key, value: storage.getItem(key) });
+    }
+    console.log(JSON.stringify(store))
 }
 
 // Message socket closes
